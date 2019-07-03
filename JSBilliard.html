@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Java Script Billiard</title>
+    <style>
+        html {
+            background-color : green;
+        }
+        #tag {
+            background-color : red;
+            border-radius: 50px;
+            width : 50px;
+            height: 50px;
+            position : absolute;
+            text-align : center;
+            top : 0;
+            left : 0;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var tag = document.getElementById("tag");
+            var xLimit = window.innerWidth;
+            var yLimit = window.innerHeight;
+            var absoluteX = window.pageXOffset + tag.getBoundingClientRect().left;
+            var absoluteY = window.pageYOffset + tag.getBoundingClientRect().top;
+            var xvec, yvec;
+            xvec = yvec = 1;
+            var timer = setInterval(function(){
+                if (absoluteX > (xLimit-50) || absoluteX < 0)
+                    xvec *= -1;
+                if (absoluteY > (yLimit-50) || absoluteY < 0)
+                    yvec *= -1;
+                vector(xvec, yvec);
+                tag.style.top = String(absoluteY) + "px";
+                tag.style.left = String(absoluteX) + "px";
+            }, 10);
+            function vector(x, y) {
+                absoluteX = absoluteX + (1 * x);
+                absoluteY = absoluteY + (1 * y);
+            }
+        };
+
+    </script>
+</head>
+<body>
+    <div id="tag"></div>
+</body>
+</html>
